@@ -27,13 +27,19 @@ public class TestInitDb {
     @RequiredArgsConstructor
     static class InitService {
         private final EntityManager em;
+        private final EncryptService encryptService;
 
         public void dbInit() {
 
-            Member member = new Member("최성보", "qwer@naver.com", "1234", LocalDateTime.now());
+//            Member member = new Member("최성보", "최성보", "qwer@naver.com", "1234", "010-1234-5678", "서울특별시", LocalDateTime.now(), false, 1, LocalDateTime.now());
+//            em.persist(member);
+            String encryptedPwd = encryptService.encryptPwd("qwer1234");
+            String encryptedPhone = encryptService.aesEncrypt("010-1234-5678");
+            String encryptedAddress = encryptService.aesEncrypt("서울특별시");
+            Member member = new Member("최성보", "최성보", "cseongbo17@naver.com", encryptedPwd, encryptedPhone, encryptedAddress, LocalDateTime.now(), false, 1, LocalDateTime.now());
             em.persist(member);
 
-            Product product = new Product("AirForce", 100000, "Shoes", "신발임.", 10);
+            Product product = new Product("AirForce", 100000, 1L, "신발임.", 10, "", LocalDateTime.now());
             em.persist(product);
 
         }

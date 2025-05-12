@@ -7,7 +7,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class OrderInfo {
+public class ProductOrderRequest {
     private Long id;
     private String name;
     private int quantity;
