@@ -174,27 +174,25 @@ public class MemberService {
 
         if (members.isEmpty()) throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
         else {
-            if (members.isEmpty()) throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
-            else {
-                return members.stream()
-                        .map(member -> {
-                            String decryptedAddress = encryptService.aesDecrypt(member.getAddress());
-                            String decryptedPhone = encryptService.aesDecrypt(member.getPhone());
+            return members.stream()
+                    .map(member -> {
+                        String decryptedAddress = encryptService.aesDecrypt(member.getAddress());
+                        String decryptedPhone = encryptService.aesDecrypt(member.getPhone());
 
-                            return new MemberResponse(
-                                    member.getId(),
-                                    member.getName(),
-                                    member.getNickname(),
-                                    decryptedPhone,
-                                    decryptedAddress,
-                                    member.getUpdatedAt(),
-                                    member.isStatus(),
-                                    member.getAuthority(),
-                                    member.getEmail(),
-                                    member.getJoinDate()
-                            );
-                        }).collect(Collectors.toList());
-            }
+                        return new MemberResponse(
+                                member.getId(),
+                                member.getName(),
+                                member.getNickname(),
+                                decryptedPhone,
+                                decryptedAddress,
+                                member.getUpdatedAt(),
+                                member.isStatus(),
+                                member.getAuthority(),
+                                member.getEmail(),
+                                member.getJoinDate()
+                        );
+                    }).collect(Collectors.toList());
+
         }
     }
 
