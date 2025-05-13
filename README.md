@@ -87,7 +87,7 @@ public List<ProductResponse> getAllProducts() {
 
 }
 ```
-### 3. 응답 결과 예시
+### 3. 성공 응답 결과 예시
 ```json
 {
     "success": true,
@@ -105,5 +105,14 @@ public List<ProductResponse> getAllProducts() {
         "email": "cseongbo17@naver.com",
         "joinDate": "2025-05-12T14:12:51.229682"
     }
+}
+```
+### 4. 실패 응답 결과 예시
+```json
+{
+    "success": false,
+    "code": 1002,
+    "message": "이미 사용 중인 이메일입니다.",
+    "data": null
 }
 ```
