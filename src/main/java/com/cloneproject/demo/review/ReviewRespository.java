@@ -1,4 +1,4 @@
-package com.cloneproject.demo;
+package com.cloneproject.demo.review;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

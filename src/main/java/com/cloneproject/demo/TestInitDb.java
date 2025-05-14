@@ -1,5 +1,8 @@
 package com.cloneproject.demo;
 
+import com.cloneproject.demo.member.Member;
+import com.cloneproject.demo.product.Product;
+import com.cloneproject.demo.util.EncryptService;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.cloneproject.demo;
+package com.cloneproject.demo.reviewComment;
 
 import jakarta.persistence.*;
 import lombok.Getter;

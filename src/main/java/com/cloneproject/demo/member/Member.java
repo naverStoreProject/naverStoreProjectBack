@@ -1,4 +1,4 @@
-package com.cloneproject.demo;
+package com.cloneproject.demo.member;
 
 /**
  * 이 페이지는 DB에 있는거 그대로 따라하면 됨
@@ -9,7 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.validation.constraints.Pattern;
 
 //유틸
 import lombok.*;

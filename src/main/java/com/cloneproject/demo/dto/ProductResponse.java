@@ -1,6 +1,6 @@
 package com.cloneproject.demo.dto;
 
-import com.cloneproject.demo.Product;
+import com.cloneproject.demo.product.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
