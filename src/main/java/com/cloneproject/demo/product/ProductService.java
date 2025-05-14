@@ -1,4 +1,4 @@
-package com.cloneproject.demo;
+package com.cloneproject.demo.product;
 
 import com.cloneproject.demo.dto.ProductOrderRequest;
 import com.cloneproject.demo.dto.ProductResponse;

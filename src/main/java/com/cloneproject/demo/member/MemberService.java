@@ -1,5 +1,6 @@
-package com.cloneproject.demo;
+package com.cloneproject.demo.member;
 
+import com.cloneproject.demo.util.EncryptService;
 import com.cloneproject.demo.dto.MemberResponse;
 import com.cloneproject.demo.dto.MemberRegisterRequest;
 import com.cloneproject.demo.dto.MemberUpdateRequest;

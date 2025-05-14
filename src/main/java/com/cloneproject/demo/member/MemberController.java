@@ -1,4 +1,4 @@
-package com.cloneproject.demo;
+package com.cloneproject.demo.member;
 
 import java.util.List;
 

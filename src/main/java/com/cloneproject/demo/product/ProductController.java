@@ -1,13 +1,10 @@
-package com.cloneproject.demo;
+package com.cloneproject.demo.product;
 
 import com.cloneproject.demo.dto.ProductOrderRequest;
 import com.cloneproject.demo.dto.ProductResponse;
 import com.cloneproject.demo.response.ApiResponse;
-import com.cloneproject.demo.response.CustomException;
-import com.cloneproject.demo.response.ErrorCode;
 import com.cloneproject.demo.response.SuccessCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

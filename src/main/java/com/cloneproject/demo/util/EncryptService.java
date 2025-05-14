@@ -1,4 +1,4 @@
-package com.cloneproject.demo;
+package com.cloneproject.demo.util;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.encrypt.AesBytesEncryptor;
