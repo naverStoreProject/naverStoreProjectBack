@@ -52,7 +52,7 @@ public class MemberService {
     @Transactional
     public void registerMember(MemberRegisterRequest memberRegisterRequest) {
 
-        List<Member> m = memberRepository.findByEmail(memberRegisterRequest.getEmail());
+        Optional<Member> m = memberRepository.findByEmail(memberRegisterRequest.getEmail());
         if (!m.isEmpty()) throw new CustomException(ErrorCode.DUPLICATE_EMAIL);
         else {
             String encryptedPwd = encryptService.encryptPwd(memberRegisterRequest.getPwd());
@@ -171,30 +171,27 @@ public class MemberService {
     }
 
     public List<MemberResponse> getMembersByEmail(String email) {
-        List<Member> members = memberRepository.findByEmail(email);
+        Optional<Member> optionalMember = memberRepository.findByEmail(email);
 
-        if (members.isEmpty()) throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
-        else {
-            return members.stream()
-                    .map(member -> {
-                        String decryptedAddress = encryptService.aesDecrypt(member.getAddress());
-                        String decryptedPhone = encryptService.aesDecrypt(member.getPhone());
+        if (!optionalMember.isPresent()) throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
 
-                        return new MemberResponse(
-                                member.getId(),
-                                member.getName(),
-                                member.getNickname(),
-                                decryptedPhone,
-                                decryptedAddress,
-                                member.getUpdatedAt(),
-                                member.isStatus(),
-                                member.getAuthority(),
-                                member.getEmail(),
-                                member.getJoinDate()
-                        );
-                    }).collect(Collectors.toList());
+        Member member = optionalMember.get();
 
-        }
+        String decryptedAddress = encryptService.aesDecrypt(member.getAddress());
+        String decryptedPhone = encryptService.aesDecrypt(member.getPhone());
+
+        return List.of(new MemberResponse(
+                member.getId(),
+                member.getName(),
+                member.getNickname(),
+                decryptedPhone,
+                decryptedAddress,
+                member.getUpdatedAt(),
+                member.isStatus(),
+                member.getAuthority(),
+                member.getEmail(),
+                member.getJoinDate()
+        ));
     }
 
 
