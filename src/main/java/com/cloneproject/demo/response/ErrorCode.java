@@ -18,8 +18,13 @@ public enum ErrorCode {
     DUPLICATE_PRODUCT(2003, "이미 있는 상품입니다.", HttpStatus.CONFLICT),
 
     // Review
-    REVIEW_NOT_FOUND(3001, "후기 정보를 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
+    REVIEW_NOT_FOUND(3001, "후기 정보를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
 
+
+    // Login
+    INVALID_TOKEN(4001, "유효하지 않은 토큰", HttpStatus.UNAUTHORIZED),
+    INVALID_EMAIL(4002, "올바르지 않은 이메일", HttpStatus.UNAUTHORIZED),
+    INVALID_PASSWORD(4003, "올바리즈 않은 비밀번호", HttpStatus.UNAUTHORIZED);
 
     private final int code;
     private final String message;

@@ -28,7 +28,7 @@ public class MemberController {
     } else if (name != null) {
       return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_FETCH_SUCCESS, memberService.getMembersByName(name)));
     } else if (email != null) {
-      return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_FETCH_SUCCESS, memberService.getMembersByEmail(email)));
+//      return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_FETCH_SUCCESS, memberService.getMemberByEmail(email)));
     }
     
     return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_FETCH_SUCCESS, memberService.getAllMembers()));
