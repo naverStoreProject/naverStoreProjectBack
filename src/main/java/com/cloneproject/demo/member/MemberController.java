@@ -2,6 +2,7 @@ package com.cloneproject.demo.member;
 
 import java.util.List;
 
+import com.cloneproject.demo.auth.dto.LoginMember;
 import com.cloneproject.demo.dto.MemberResponse;
 import com.cloneproject.demo.dto.MemberRegisterRequest;
 import com.cloneproject.demo.dto.MemberUpdateRequest;
@@ -9,6 +10,8 @@ import com.cloneproject.demo.response.ApiResponse;
 import com.cloneproject.demo.response.SuccessCode;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
@@ -32,6 +35,13 @@ public class MemberController {
     }
     
     return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_FETCH_SUCCESS, memberService.getAllMembers()));
+  }
+
+  @PreAuthorize("hasRole('USER')")
+  @GetMapping("/api/member/me")
+  public ResponseEntity<ApiResponse<MemberResponse>> getMyInfo(@AuthenticationPrincipal LoginMember loginMember) {
+    MemberResponse myInfo = memberService.getMemberById(loginMember.getId());
+    return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_FETCH_SUCCESS, myInfo));
   }
 
   /**

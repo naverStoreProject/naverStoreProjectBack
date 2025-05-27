@@ -64,6 +64,29 @@ public class MemberService {
 
     }
 
+    public MemberResponse getMyInfo(Long id) {
+        Optional<Member> findMember = memberRepository.findById(id);
+        if (!findMember.isPresent()) throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
+        else {
+            Member member = findMember.get();
+            String decryptedAddress = encryptService.aesDecrypt(member.getAddress());
+            String decryptedPhone = encryptService.aesDecrypt(member.getPhone());
+
+            return MemberResponse.builder()
+                    .id(member.getId())
+                    .name(member.getName())
+                    .nickname(member.getNickname())
+                    .phone(decryptedPhone)
+                    .address(decryptedAddress)
+                    .updatedAt(member.getUpdatedAt())
+                    .status(member.isStatus())
+                    .authority(member.getAuthority())
+                    .email(member.getEmail())
+                    .joinDate(member.getJoinDate())
+                    .build();
+        }
+    }
+
     public MemberResponse getMemberById(Long id) {
         return memberRepository.findById(id)
                 .map(member -> {
