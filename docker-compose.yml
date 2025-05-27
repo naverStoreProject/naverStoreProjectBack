@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   app:
@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
       target: build
     ports:
-      - "8080:8080"
+      - "${PORT:-8080}:${CONTAINER_PORT:-8080}"
     volumes:
       - .:/app
     working_dir: /app
