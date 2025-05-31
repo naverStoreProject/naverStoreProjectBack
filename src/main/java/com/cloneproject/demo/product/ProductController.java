@@ -15,7 +15,6 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-    private final ProductRepository productRepository;
 
 
     @PostMapping("/api/product/add")

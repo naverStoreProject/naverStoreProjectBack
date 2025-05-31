@@ -1,6 +1,7 @@
 package com.cloneproject.demo.dto;
 
 import com.cloneproject.demo.member.Member;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class MemberResponse {
     private String email;  //이메일
     private LocalDateTime joinDate;
 
+    @Builder
     public MemberResponse(Long id, String name, String nickname, String phone, String address, LocalDateTime updatedAt, boolean status, Integer authority, String email, LocalDateTime joinDate) {
         this.id = id;
         this.name = name;

@@ -5,10 +5,7 @@ package com.cloneproject.demo.member;
  */
 
 // 필수
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 
 //유틸
 import lombok.*;
@@ -28,7 +25,9 @@ public class Member {
   private String name; //이름
   @Setter
   private String nickname;
+
   @Setter
+  @Column(unique = true)
   private String email;  //이메일
 
   private String pwd; //sha256
