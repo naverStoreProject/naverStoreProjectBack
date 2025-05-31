@@ -24,7 +24,8 @@ public enum ErrorCode {
     // Login
     INVALID_TOKEN(4001, "유효하지 않은 토큰", HttpStatus.UNAUTHORIZED),
     INVALID_EMAIL(4002, "올바르지 않은 이메일", HttpStatus.UNAUTHORIZED),
-    INVALID_PASSWORD(4003, "올바리즈 않은 비밀번호", HttpStatus.UNAUTHORIZED);
+    INVALID_PASSWORD(4003, "올바르지 않은 비밀번호", HttpStatus.UNAUTHORIZED),
+    ACCESS_DENIED(4004, "권한이 없습니다.", HttpStatus.FORBIDDEN);
 
     private final int code;
     private final String message;

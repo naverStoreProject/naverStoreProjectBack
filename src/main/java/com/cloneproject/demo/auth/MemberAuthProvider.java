@@ -5,8 +5,6 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.cloneproject.demo.member.MemberService;
-import com.cloneproject.demo.response.CustomException;
-import com.cloneproject.demo.response.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -36,7 +34,7 @@ public class MemberAuthProvider {
 
 
     // 클라이언트가 보낸 토큰 검증하고, 해당 멤버 ID반환 해주는 함수임.
-    public Long getMemberIdFromToken(String token) {
+    public Long getMemberIdFromToken(String token) throws JWTVerificationException {
 
         DecodedJWT jwt = JWT.require(Algorithm.HMAC256(secretKey))
                 .build()
@@ -47,6 +45,8 @@ public class MemberAuthProvider {
 
     }
 
+    // SignatureVerificationException
+    //
 
 
 

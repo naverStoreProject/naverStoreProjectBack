@@ -6,7 +6,6 @@ import com.cloneproject.demo.response.ApiResponse;
 import com.cloneproject.demo.response.SuccessCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-    private final ProductRepository productRepository;
 
 
     @PostMapping("/api/product/add")
@@ -43,7 +41,6 @@ public class ProductController {
      * @param category 조회할 상품의 카테고리(null이어도 가능)
      * @return category가 null이면 상품 전체 조회, null이 아니라면 해당 카테고리의 product 조회
      */
-    @PreAuthorize("hasRole('USER')")
     @GetMapping("/api/products")
     public ResponseEntity<ApiResponse<List<ProductResponse>>> getProductsByCategory(@RequestParam(required = false) Long category) {
         if (category == null) return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_FETCH_SUCCESS, productService.getAllProducts()));
