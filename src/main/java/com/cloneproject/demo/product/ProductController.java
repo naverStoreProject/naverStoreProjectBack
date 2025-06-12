@@ -1,5 +1,6 @@
 package com.cloneproject.demo.product;
 
+import com.cloneproject.demo.dto.ProductAddRequest;
 import com.cloneproject.demo.dto.ProductOrderRequest;
 import com.cloneproject.demo.dto.ProductResponse;
 import com.cloneproject.demo.response.ApiResponse;
@@ -18,8 +19,8 @@ public class ProductController {
 
 
     @PostMapping("/api/product/add")
-    public ResponseEntity<ApiResponse<Void>> addProduct(@RequestBody ProductResponse productResponse) {
-        productService.addProduct(productResponse);
+    public ResponseEntity<ApiResponse<Void>> addProduct(@RequestBody ProductAddRequest productAddRequest) {
+        productService.addProduct(productAddRequest);
         return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_SAVE_SUCCESS));
     }
 

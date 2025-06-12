@@ -3,23 +3,27 @@ package com.cloneproject.demo.product;
 import com.cloneproject.demo.response.CustomException;
 import com.cloneproject.demo.response.ErrorCode;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @ToString
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Product {
     @Id
     @GeneratedValue( strategy =  GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+    private String brand;
     private int price;
+    @Column(precision = 3, scale = 2)
+    private BigDecimal discountRate;
     private Long category;
 
     @Lob
@@ -29,15 +33,6 @@ public class Product {
     private String thumbnailURL;
     private LocalDateTime createdAt;
 
-    public Product(String name, int price, Long category, String description, int stockQuantity, String thumbnailURL, LocalDateTime createdAt) {
-        this.name = name;
-        this.price = price;
-        this.category = category;
-        this.description = description;
-        this.stockQuantity = stockQuantity;
-        this.thumbnailURL = thumbnailURL;
-        this.createdAt = createdAt;
-    }
 
     public void decreaseQuantity(int quantity) {
         if (this.stockQuantity - quantity < 0) {

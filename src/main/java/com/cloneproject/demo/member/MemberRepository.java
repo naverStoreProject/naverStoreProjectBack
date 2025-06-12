@@ -3,7 +3,10 @@ package com.cloneproject.demo.member;
 import java.util.List;
 import java.util.Optional;
 
+import com.cloneproject.demo.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  * Spring Data JPA 기본 제공 메소드
@@ -49,4 +52,11 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findByName(String name);
     Optional<Member> findByEmail(String email);
     List<Member> findByNameAndEmail(String name, String email);
+
+    @Query(value = "SELECT COUNT(*) FROM member_wishlist WHERE member_id = :id", nativeQuery = true)
+    int countWishlist(@Param("id") Long id);
+
+
+
+
 } 
