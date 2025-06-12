@@ -26,11 +26,11 @@ public class MainBannerService {
     }
   }
 
-  public List<MainBannerResponse> getMainBanner(Long id) {
-    MainBanner mbanner = mainBannerRepository.findById(id)
-      .orElseThrow(() -> new CustomException(ErrorCode.MAINBANNER_NOT_FOUND));
+  // public List<MainBannerResponse> getMainBanner(Long id) {
+  //   MainBanner mbanner = mainBannerRepository.findById(id)
+  //     .orElseThrow(() -> new CustomException(ErrorCode.MAINBANNER_NOT_FOUND));
 
-    return List.of(MainBannerResponse.from(mbanner));
-  }
+  //   return List.of(MainBannerResponse.from(mbanner));
+  // }
 
 }

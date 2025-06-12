@@ -17,7 +17,7 @@ public enum SuccessCode {
     PRODUCT_ORDER_SUCCESS(202, "상품 주문 성공"),
 
     // Login
-    LOGIN_SUCCESS(301, "로그인 성공");
+    LOGIN_SUCCESS(301, "로그인 성공"),
     
     // Review
     

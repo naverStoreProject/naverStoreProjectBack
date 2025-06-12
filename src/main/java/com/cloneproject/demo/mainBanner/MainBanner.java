@@ -34,20 +34,3 @@ public class MainBanner {
     private int isHide;
     private int isDelete;
 }
-
-/*
- * CREATE TABLE `main_banner` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `title` varchar(100) NOT NULL,
-    `main_img` varchar(100) NOT NULL DEFAULT '',
-    `semi_img_1` varchar(100) NOT NULL DEFAULT '',
-    `semi_img_2` varchar(100) NOT NULL DEFAULT '',
-    `semi_img_3` varchar(100) NOT NULL DEFAULT '',
-    `semi_img_4` varchar(100) NOT NULL DEFAULT '',
-    `reg_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `reg_ip` varchar(50) NOT NULL DEFAULT '',
-    `is_hide` tinyint(1) NOT NULL DEFAULT 1,
-    `is_delete` tinyint(1) NOT NULL DEFAULT 1,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
- */

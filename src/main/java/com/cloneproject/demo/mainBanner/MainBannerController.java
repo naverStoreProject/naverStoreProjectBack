@@ -26,11 +26,15 @@ public class MainBannerController {
       );
   }
 
-  @GetMapping("/api/mainBanners/{id}")
-  public ResponseEntity<ApiResponse<List<MainBannerResponse>>> getMainBanner() {
+  // @GetMapping("/api/mainBanners/{id}")
+  // public ResponseEntity<ApiResponse<List<MainBannerResponse>>> getMainBanner(Long id) {
 
-    List<MainBannerResponse> mbanner;
+  //   List<MainBannerResponse> mbanner = mainBannerService.getMainBanner(id); // MainBannerService의 메서드 호출
 
-  }
+  //   return ResponseEntity.ok(
+  //       ApiResponse.success(SuccessCode.MB_FETCH_SUCCESS, mbanner)
+  //   );
+
+  // }
 
 }
