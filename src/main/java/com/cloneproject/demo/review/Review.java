@@ -1,14 +1,19 @@
 package com.cloneproject.demo.review;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Review {
 
     @Id @GeneratedValue( strategy =  GenerationType.IDENTITY)
@@ -29,18 +34,8 @@ public class Review {
     private int likes;
     private int dislikes;
     private boolean verified;
+    @Column(precision = 2, scale = 1)
+    private BigDecimal rating;
 
-    public Review(Long productId, Long userId, String title, String content, LocalDateTime createdAt, LocalDateTime updatedAt, boolean deleted, boolean blinded, int likes, int dislikes, boolean verified) {
-        this.productId = productId;
-        this.userId = userId;
-        this.title = title;
-        this.content = content;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.deleted = deleted;
-        this.blinded = blinded;
-        this.likes = likes;
-        this.dislikes = dislikes;
-        this.verified = verified;
-    }
+
 }

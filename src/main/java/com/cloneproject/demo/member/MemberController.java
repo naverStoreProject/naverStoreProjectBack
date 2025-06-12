@@ -3,9 +3,7 @@ package com.cloneproject.demo.member;
 import java.util.List;
 
 import com.cloneproject.demo.auth.dto.LoginMember;
-import com.cloneproject.demo.dto.MemberResponse;
-import com.cloneproject.demo.dto.MemberRegisterRequest;
-import com.cloneproject.demo.dto.MemberUpdateRequest;
+import com.cloneproject.demo.dto.*;
 import com.cloneproject.demo.response.ApiResponse;
 import com.cloneproject.demo.response.SuccessCode;
 import jakarta.validation.Valid;
@@ -39,8 +37,8 @@ public class MemberController {
 
   @PreAuthorize("hasRole('USER')")
   @GetMapping("/api/member/me")
-  public ResponseEntity<ApiResponse<MemberResponse>> getMyInfo(@AuthenticationPrincipal LoginMember loginMember) {
-    MemberResponse myInfo = memberService.getMemberById(loginMember.getId());
+  public ResponseEntity<ApiResponse<MyInfo>> getMyInfo(@AuthenticationPrincipal LoginMember loginMember) {
+    MyInfo myInfo = memberService.getMyInfo(loginMember.getId());
     return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_FETCH_SUCCESS, myInfo));
   }
 
@@ -88,6 +86,13 @@ public class MemberController {
   public ResponseEntity<ApiResponse<Void>> registerMember(@RequestBody @Valid MemberRegisterRequest memberRegisterRequest) {
     memberService.registerMember(memberRegisterRequest);
     return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_CREATE_SUCCESS));
+  }
+
+  @GetMapping("/api/member/mywishlist")
+  public ResponseEntity<ApiResponse<List<ProductResponse>>> getMyWishlist(@AuthenticationPrincipal LoginMember loginMember) {
+    List<ProductResponse> myWishlist = memberService.getMyWishList(loginMember.getId());
+    return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_FETCH_SUCCESS, myWishlist));
+
   }
 
 }

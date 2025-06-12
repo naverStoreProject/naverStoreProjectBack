@@ -1,5 +1,6 @@
 package com.cloneproject.demo.product;
 
+import com.cloneproject.demo.dto.ProductAddRequest;
 import com.cloneproject.demo.dto.ProductOrderRequest;
 import com.cloneproject.demo.dto.ProductResponse;
 import com.cloneproject.demo.response.CustomException;
@@ -17,9 +18,9 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public void addProduct(ProductResponse productResponse) {
-        if (!productRepository.findByName(productResponse.getName()).isEmpty()) throw new CustomException(ErrorCode.DUPLICATE_PRODUCT);
-        Product saveProduct = productResponse.toEntity();
+    public void addProduct(ProductAddRequest productAddRequest) {
+        if (!productRepository.findByName(productAddRequest.getName()).isEmpty()) throw new CustomException(ErrorCode.DUPLICATE_PRODUCT);
+        Product saveProduct = productAddRequest.toEntity();
         productRepository.save(saveProduct);
     }
 
@@ -56,6 +57,8 @@ public class ProductService {
                     .toList();
         }
     }
+
+
 
 
 

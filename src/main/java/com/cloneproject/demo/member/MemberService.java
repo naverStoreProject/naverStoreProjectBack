@@ -1,9 +1,9 @@
 package com.cloneproject.demo.member;
 
+import com.cloneproject.demo.dto.*;
+import com.cloneproject.demo.product.Product;
+import com.cloneproject.demo.product.ProductRepository;
 import com.cloneproject.demo.util.EncryptService;
-import com.cloneproject.demo.dto.MemberResponse;
-import com.cloneproject.demo.dto.MemberRegisterRequest;
-import com.cloneproject.demo.dto.MemberUpdateRequest;
 import com.cloneproject.demo.response.ErrorCode;
 import com.cloneproject.demo.response.CustomException;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final ProductRepository productRepository;
     private final EncryptService encryptService;
 
 
@@ -64,25 +65,23 @@ public class MemberService {
 
     }
 
-    public MemberResponse getMyInfo(Long id) {
+    public MyInfo getMyInfo(Long id) {
         Optional<Member> findMember = memberRepository.findById(id);
+
         if (!findMember.isPresent()) throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
         else {
             Member member = findMember.get();
             String decryptedAddress = encryptService.aesDecrypt(member.getAddress());
             String decryptedPhone = encryptService.aesDecrypt(member.getPhone());
+            int wishNum = memberRepository.countWishlist(id);
 
-            return MemberResponse.builder()
-                    .id(member.getId())
+            return MyInfo.builder()
                     .name(member.getName())
                     .nickname(member.getNickname())
+                    .email(member.getEmail())
                     .phone(decryptedPhone)
                     .address(decryptedAddress)
-                    .updatedAt(member.getUpdatedAt())
-                    .status(member.isStatus())
-                    .authority(member.getAuthority())
-                    .email(member.getEmail())
-                    .joinDate(member.getJoinDate())
+                    .wishNum(wishNum)
                     .build();
         }
     }
@@ -217,6 +216,12 @@ public class MemberService {
             );
 
         }
+    }
+
+    List<ProductResponse> getMyWishList(Long memberId) {
+        return productRepository.findWishListByUserId(memberId).stream()
+                .map(ProductResponse::new)  // 위에서 만든 Tuple 생성자 사용
+                .collect(Collectors.toList());
     }
 
 
