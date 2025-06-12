@@ -18,7 +18,10 @@ public enum ErrorCode {
     DUPLICATE_PRODUCT(2003, "이미 있는 상품입니다.", HttpStatus.CONFLICT),
 
     // Review
-    REVIEW_NOT_FOUND(3001, "후기 정보를 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
+    REVIEW_NOT_FOUND(3001, "후기 정보를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
+
+    // mainBanner
+    MAINBANNER_NOT_FOUND(4001, "메인 배너를 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
 
 
     private final int code;

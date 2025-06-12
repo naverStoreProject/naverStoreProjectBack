@@ -14,7 +14,12 @@ public enum SuccessCode {
     // Product
     PRODUCT_FETCH_SUCCESS(200, "상품 조회 성공"),
     PRODUCT_SAVE_SUCCESS(201, "상품 저장 성공"),
-    PRODUCT_ORDER_SUCCESS(202, "상품 주문 성공");
+    PRODUCT_ORDER_SUCCESS(202, "상품 주문 성공"),
+    
+    // Review
+    
+    // MainBanner
+    MB_FETCH_SUCCESS(400, "메인 배너 가져오기 성공");
 
     private final int code;
     private final String message;
