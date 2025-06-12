@@ -18,6 +18,11 @@ public enum SuccessCode {
 
     // Login
     LOGIN_SUCCESS(301, "로그인 성공");
+    
+    // Review
+    
+    // MainBanner
+    MB_FETCH_SUCCESS(500, "메인 배너 가져오기 성공");
 
     private final int code;
     private final String message;
