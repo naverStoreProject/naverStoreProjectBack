@@ -2,10 +2,9 @@ package com.cloneproject.demo.auth;
 
 import com.cloneproject.demo.auth.dto.TokenResponse;
 import com.cloneproject.demo.member.Member;
-import com.cloneproject.demo.member.MemberRepository;
+import com.cloneproject.demo.member.repository.MemberSpringDataJpaRepository;
 import com.cloneproject.demo.response.CustomException;
 import com.cloneproject.demo.response.ErrorCode;
-import com.cloneproject.demo.util.EncryptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,14 +15,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final MemberRepository memberRepository;
-    private final EncryptService encryptService;
+    private final MemberSpringDataJpaRepository memberSpringDataJpaRepository;
     private final MemberAuthProvider memberAuthProvider;
     private final PasswordEncoder passwordEncoder;
 
 
     public TokenResponse memberLogin(String email, String pwd) {
-        Optional<Member> findMember = memberRepository.findByEmail(email);
+        Optional<Member> findMember = memberSpringDataJpaRepository.findByEmail(email);
 
         if (!findMember.isPresent()) throw new CustomException(ErrorCode.INVALID_EMAIL);
 

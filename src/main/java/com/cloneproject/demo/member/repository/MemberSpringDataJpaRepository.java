@@ -1,9 +1,9 @@
-package com.cloneproject.demo.member;
+package com.cloneproject.demo.member.repository;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.cloneproject.demo.product.Product;
+import com.cloneproject.demo.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -48,7 +48,7 @@ import org.springframework.data.repository.query.Param;
  * 참고: https://priming.tistory.com/114
  */
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberSpringDataJpaRepository extends JpaRepository<Member, Long>, MemberRepository {
     List<Member> findByName(String name);
     Optional<Member> findByEmail(String email);
     List<Member> findByNameAndEmail(String name, String email);
