@@ -14,6 +14,10 @@ JOIN member m ON mw.member_id = m.id
 LEFT JOIN review_statistic rs ON p.id = rs.product_id
 WHERE m.id = 1;
 
+SHOW TABLES;
+
+SELECT * FROM product;
+
 
 
 

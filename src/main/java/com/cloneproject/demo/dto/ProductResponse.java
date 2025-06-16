@@ -26,8 +26,10 @@ public class ProductResponse {
     private String description;
     private int stockQuantity;
     private String image;
+
     @Column(precision = 3, scale = 2)
     private BigDecimal averageRating;
+
     private int ratingCount;
 
     
@@ -35,7 +37,7 @@ public class ProductResponse {
 //        return new Product(name, price, discountRate, category, description, stockQuantity, thumbnailURL, LocalDateTime.now());
 //    }
 
-    public ProductResponse(Product product) {
+    private ProductResponse(Product product) {
         this.name = product.getName();
         this.brand = product.getBrand();
         this.originalPrice = product.getPrice();
@@ -50,22 +52,8 @@ public class ProductResponse {
         this.image = product.getThumbnailURL();
     }
 
-    public ProductResponse(Tuple tuple) {
-        this.name = tuple.get("name", String.class);
-        this.brand = tuple.get("brand", String.class);
-        this.originalPrice = tuple.get("original_price", Integer.class);
-        this.discountRate = tuple.get("discount_rate", BigDecimal.class);
-        this.currentPrice = tuple.get("current_price", BigDecimal.class).intValue();
-        this.category = tuple.get("category", Long.class);
-        this.stockQuantity = tuple.get("stock_quantity", Integer.class);
-        this.description = tuple.get("description", String.class);
-        this.image = tuple.get("image", String.class);
-
-        if (tuple.get("average_rating") != null) this.averageRating = tuple.get("average_rating", BigDecimal.class);
-        else this.averageRating = BigDecimal.valueOf(0.00);
-
-        if (tuple.get("rating_count", Integer.class) != null) this.ratingCount = tuple.get("rating_count", Integer.class);
-        else this.ratingCount = 0;
+    public static ProductResponse of(Product product) {
+        return product == null ? null : new ProductResponse(product);
     }
 
 

@@ -88,11 +88,11 @@ public class MemberController {
     return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_CREATE_SUCCESS));
   }
 
-  @GetMapping("/api/member/mywishlist")
-  public ResponseEntity<ApiResponse<List<ProductResponse>>> getMyWishlist(@AuthenticationPrincipal LoginMember loginMember) {
-    List<ProductResponse> myWishlist = memberService.getMyWishList(loginMember.getId());
-    return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_FETCH_SUCCESS, myWishlist));
-
-  }
+//  @GetMapping("/api/member/mywishlist")
+//  public ResponseEntity<ApiResponse<List<ProductResponse>>> getMyWishlist(@AuthenticationPrincipal LoginMember loginMember) {
+//    List<ProductResponse> myWishlist = memberService.getMyWishList(loginMember.getId());
+//    return ResponseEntity.ok(ApiResponse.success(SuccessCode.MEMBER_FETCH_SUCCESS, myWishlist));
+//
+//  }
 
 }
