@@ -16,11 +16,19 @@ public class OrderController {
 	
 	private final OrderService orderService;
 	
-	//	특정 회원의 전체 주문내역 조회
-	@GetMapping("/api/order/id")
-	public ResponseEntity<ApiResponse<List<OrderResponse>>> getOrdersByMemberId(
-			@RequestParam Long memberId) {
+	//	회원 ID로 주문 내역 전체 조회(1년 이내)
+	@GetMapping
+	public ResponseEntity<ApiResponse<List<OrderResponse>>> getOrders(@RequestParam Long memberId) {
 		List<OrderResponse> orders = orderService.getOrdersByMemberId(memberId);
 		return ResponseEntity.ok(ApiResponse.success(SuccessCode.ORDER_FETCH_SUCCESS, orders));
 	}
+	
+	//	상품명 키워드 검색
+	@GetMapping("/search")
+	public ResponseEntity<ApiResponse<List<OrderResponse>>> searchOrders(@RequestParam Long memberId,
+			@RequestParam String keyword) {
+		List<OrderResponse> result = orderService.searchOrdersByProductName(memberId, keyword);
+		return ResponseEntity.ok(ApiResponse.success(SuccessCode.ORDER_FETCH_SUCCESS, result));
+	}
+	
 }

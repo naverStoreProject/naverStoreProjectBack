@@ -1,17 +1,15 @@
 package com.cloneproject.demo.order;
 
-import com.cloneproject.demo.member.Member;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,22 +18,26 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class OrderItem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	//	주문 날짜
-	private LocalDateTime orderDate;
-	
-	//	주문자와의 관계 설정
+	//주문과의 관계
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id")
-	private Member member;
+	@JoinColumn(name = "order_id")
+	private Order order;
 	
-	//	주문 상품과의 관계 설정
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<OrderItem> orderItems;
+	//	주문 상태
+	@Enumerated(EnumType.STRING)
+	private OrderStatus orderStatus;
+	
+	private String productImage;
+	private String productName;
+	private int price;
+	private String company;
+	private LocalDateTime statusChanged;
+	private String productLink;
 	
 }

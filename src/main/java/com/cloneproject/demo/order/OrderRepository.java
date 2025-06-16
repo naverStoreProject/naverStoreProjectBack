@@ -1,25 +1,20 @@
 package com.cloneproject.demo.order;
 
 import com.cloneproject.demo.member.Member;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 	
-	//	특정 회원의 모든 주문 내역
-	List<Order> findByMember(Member member);
+	//	특정 회원의 모든 주문 내역 반환(최신순)
+	List<Order> findByMemberOrderByOrderDateDesc(Member member);
 	
-	//	특정 회원+상태별 주문
-	List<Order> findByMemberAndStatus(Member member, OrderStatus status);
+	//	최근 1년 간 주문내역(최신순)
+	List<Order> findByMemberOrderInAYearByOrderDateDesc(Member memeber, LocalDateTime oneYearAgo);
 	
-	//	상태별 수량 조회
-	@Query("SELECT COUNT(o) FROM Order o WHERE o.status=:status")
-	int countByStatus(@Param("status") OrderStatus status);
-	
-	//	특정 회원의 주문 중 주문확정 상태의 총 금액
-	@Query("SELECT SUM(o.price) FROM Order o WHERE o.WHERE o.member.id=:memberId AND o.status=:status")
-	Integer sumPriceByMemberAndStatus(@Param("memberId") Long memberId,
-			@Param("status") OrderStatus status);
+	//	검색(한글자라도 포함된 경우)
+	@Query("SELECT o FROM Order o JOIN o.orderItems i WHERE o.member=:member AND i.productName LIKE %:keyword% ORDER BY o.orderDate DESC")
+	List<Order> searchOrdersByProductName(Member member, String keyword);
 }
