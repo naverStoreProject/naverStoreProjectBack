@@ -47,8 +47,8 @@ public class ProductService {
     }
 
 
-    public List<ProductResponse> getProductsByCategory(Long category) {
-        List<Product> products = productRepository.findByCategory(category);
+    public List<ProductResponse> getProductsByCategory(Integer mainCategory, Integer subCategory) {
+        List<Product> products = productRepository.findByCategory(mainCategory, subCategory);
         if (products.isEmpty()) throw new CustomException(ErrorCode.PRODUCT_NOT_FOUND);
         else {
             return products.stream()
