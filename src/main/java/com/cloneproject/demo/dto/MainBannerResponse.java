@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 public class MainBannerResponse {
   private String title;
+  private String semiTitle;
   private String mainImg;
   private String semiImg1;
   private String semiImg2;
@@ -30,6 +31,7 @@ public class MainBannerResponse {
   public static MainBannerResponse from(MainBanner mainBanner) {
     return MainBannerResponse.builder()
       .title(mainBanner.getTitle())
+      .semiTitle(mainBanner.getSemiTitle())
       .mainImg(mainBanner.getMainImg())
       .semiImg1(mainBanner.getSemiImg1())
       .semiImg2(mainBanner.getSemiImg2())

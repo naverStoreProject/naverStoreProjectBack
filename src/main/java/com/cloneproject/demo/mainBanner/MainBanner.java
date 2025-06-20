@@ -1,7 +1,5 @@
 package com.cloneproject.demo.mainBanner;
 
-import com.cloneproject.demo.response.CustomException;
-import com.cloneproject.demo.response.ErrorCode;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +22,7 @@ public class MainBanner {
     private Long id;
 
     private String title;
+    private String semiTitle;
     private String mainImg;
     private String semiImg1;
     private String semiImg2;
