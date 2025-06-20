@@ -5,7 +5,6 @@ import com.cloneproject.demo.response.ErrorCode;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -37,6 +36,8 @@ public class Product {
     private int stockQuantity;
     private int averageRating;
     private int ratingCount;
+
+    private LocalDateTime createdAt;
 
     public void decreaseQuantity(int quantity) {
         if (this.stockQuantity - quantity < 0) {

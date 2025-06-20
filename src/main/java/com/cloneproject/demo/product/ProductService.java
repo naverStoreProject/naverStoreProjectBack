@@ -28,7 +28,7 @@ public class ProductService {
         Optional<Product> product = productRepository.findById(productOrderRequest.getId());
 
         if (product.isPresent()) {
-            product.get().decreaseQuantity(productOrderRequest.getQuantity());
+            product.get().decreaseQuantity(productOrderRequest.getStockQuantity());
         } else {
             throw new CustomException(ErrorCode.PRODUCT_NOT_FOUND);
         }
