@@ -10,5 +10,5 @@ import lombok.Setter;
 public class ProductOrderRequest {
     private Long id;
     private String name;
-    private int quantity;
+    private int stockQuantity;
 }

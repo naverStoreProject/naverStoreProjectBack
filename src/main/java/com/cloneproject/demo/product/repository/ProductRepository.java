@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository {
-    Product save(Product product);
+    void save(Product product);
+//    Product save(Product product);
     Optional<Product> findById(Long id);
     List<Product> findAll();
 
     List<Product> findByName(String name);
-    List<Product> findByCategory(Long category);
+    List<Product> findByCategory(Integer mainCategory, Integer subCategory);
 
 }

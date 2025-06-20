@@ -5,7 +5,6 @@ import com.cloneproject.demo.response.ErrorCode;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,24 +14,30 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class Product {
+
     @Id
     @GeneratedValue( strategy =  GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private String brand;
-    private int price;
-    @Column(precision = 3, scale = 2)
-    private BigDecimal discountRate;
-    private Long category;
+    private String thumbnailUrl;
 
     @Lob
     @Column(columnDefinition = "TEXT")
     private String description;
-    private int stockQuantity;
-    private String thumbnailURL;
-    private LocalDateTime createdAt;
 
+    private int mainCategory;
+    private int subCategory;
+
+    private int originalPrice;
+    private int discountRate;
+
+    private int stockQuantity;
+    private int averageRating;
+    private int ratingCount;
+
+    private LocalDateTime createdAt;
 
     public void decreaseQuantity(int quantity) {
         if (this.stockQuantity - quantity < 0) {

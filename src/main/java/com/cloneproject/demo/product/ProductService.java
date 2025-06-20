@@ -28,7 +28,7 @@ public class ProductService {
         Optional<Product> product = productRepository.findById(productOrderRequest.getId());
 
         if (product.isPresent()) {
-            product.get().decreaseQuantity(productOrderRequest.getQuantity());
+            product.get().decreaseQuantity(productOrderRequest.getStockQuantity());
         } else {
             throw new CustomException(ErrorCode.PRODUCT_NOT_FOUND);
         }
@@ -47,8 +47,8 @@ public class ProductService {
     }
 
 
-    public List<ProductResponse> getProductsByCategory(Long category) {
-        List<Product> products = productRepository.findByCategory(category);
+    public List<ProductResponse> getProductsByCategory(Integer mainCategory, Integer subCategory) {
+        List<Product> products = productRepository.findByCategory(mainCategory, subCategory);
         if (products.isEmpty()) throw new CustomException(ErrorCode.PRODUCT_NOT_FOUND);
         else {
             return products.stream()

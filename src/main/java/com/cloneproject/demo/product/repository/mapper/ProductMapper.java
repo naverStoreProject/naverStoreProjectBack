@@ -13,9 +13,10 @@ import java.util.Optional;
 @Mapper
 public interface ProductMapper extends ProductRepository {
 
-    @Insert("INSERT INTO product (" +
-            "VALUES (null, #{name}, #{brand}, #{price}, #{discountRate}, #{category}, #{description}, #{stockQuantity}, #{thumnailURL}, #{createdAt})")
-    Product save(Product product);
+    @Insert("INSERT INTO product " +
+            "VALUES (null, #{name}, #{brand}, #{thumbnailUrl}, #{description}, #{mainCategory}, #{subCategory}, #{originalPrice}, #{discountRate}, #{stockQuantity}, #{averageRating}, #{ratingCount}, #{createdAt})")
+    void save(Product product);
+//    Product save(Product product);
 
 
     @Select("SELECT * FROM product WHERE id = #{id}")
@@ -27,8 +28,8 @@ public interface ProductMapper extends ProductRepository {
     @Select("SELECT * FROM product WHERE name = #{name}")
     List<Product> findByName(String name);
 
-    @Select("SELECT * FROM product WHERE category = #{category}")
-    List<Product> findByCategory(Long category);
+    @Select("SELECT * FROM product WHERE main_category = #{mainCategory} AND sub_category = #{subCategory}")
+    List<Product> findByCategory(Integer mainCategory, Integer subCategory);
 
 
 }
