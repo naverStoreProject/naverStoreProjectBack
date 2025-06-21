@@ -1,19 +1,16 @@
 package com.cloneproject.demo.orderGroup.repository;
 
 import com.cloneproject.demo.orderGroup.OrderGroup;
-import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface OrderGroupRepository {
 	
-	List<OrderGroup> findAll();
+	List<OrderGroup> findByMemberId(Long memberId);
 	
-	OrderGroup findById(Long id);
+	List<OrderGroup> findPastYearByMemberId(Long memberId);
 	
-	void insert(OrderGroup orderGroup);
+	void insert(OrderGroup group);
 	
-	void update(OrderGroup orderGroup);
-	
-	void delete(Long id);
 }

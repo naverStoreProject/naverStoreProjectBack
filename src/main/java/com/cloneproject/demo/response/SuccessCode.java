@@ -19,9 +19,11 @@ public enum SuccessCode {
 	// Order
 	ORDER_FETCH_SUCCESS(300, "주문 조회 성공"),
 	ORDER_CREATE_SUCCESS(301, "주문 생성 성공"),
+	ORDER_DELETE_SUCCESS(302, "주문 삭제 성공"),
 	
 	// Login
 	LOGIN_SUCCESS(401, "로그인 성공");
+	
 	
 	private final int code;
 	private final String message;

@@ -1,39 +1,47 @@
 package com.cloneproject.demo.orderItem;
 
+import com.cloneproject.demo.response.ApiResponse;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import com.cloneproject.demo.response.SuccessCode;
 
 @RestController
-@RequestMapping("/api/order-item")
 @RequiredArgsConstructor
+@RequestMapping("/api/order-item")
 public class OrderItemController {
 	
 	private final OrderItemService orderItemService;
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteOrderItem(@PathVariable Long id) {
-		orderItemService.deleteOrderItem(id);
-		return ResponseEntity.noContent().build();
+	//	주문 항목 리스트 조회
+	@GetMapping("/order/{orderId}")
+	public List<OrderItem> getByOrderId(@PathVariable Long orderId) {
+		return orderItemService.getByOrderId(orderId);
 	}
 	
-	@PutMapping("/confirm/{id}")
-	public ResponseEntity<Void> confirmPurchase(@PathVariable Long id) {
-		orderItemService.confirmPurchase(id);
-		return ResponseEntity.ok().build();
+	//	키워드 검색
+	@GetMapping("/search")
+	public List<OrderItem> search(@RequestParam Long memberId, @RequestParam String keyword) {
+		return orderItemService.searchByProductName(memberId, keyword);
 	}
 	
-	@PutMapping("/refund/{id}")
-	public ResponseEntity<Void> refund(@PathVariable Long id) {
-		orderItemService.refundOrderItem(id);
-		return ResponseEntity.ok().build();
+	//	상태 업데이트
+	@PutMapping("/status")
+	public void updateStatus(@RequestParam Long id, @RequestParam String status) {
+		orderItemService.updateStatus(id, status);
 	}
 	
-	@GetMapping("/member/{memberId}")
-	public ResponseEntity<List<OrderItemDTO>> getOrderItemsByMember(@PathVariable Long memberId) {
-		List<OrderItemDTO> items = orderItemService.getOrderItemsByMember(memberId);
-		return ResponseEntity.ok(items);
+	//	주문항목 삭제
+	@DeleteMapping("/api/order-items/{id}")
+	public ResponseEntity<ApiResponse<Void>> deleteItem(@PathVariable Long id) {
+		orderItemService.deleteById(id);
+		return ResponseEntity.ok(ApiResponse.success(SuccessCode.ORDER_DELETE_SUCCESS));
 	}
 }

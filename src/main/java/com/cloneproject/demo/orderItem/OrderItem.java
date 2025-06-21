@@ -7,16 +7,15 @@ import lombok.Data;
 public class OrderItem {
 	
 	private Long id;
-	private int sequence;
-	private Long orderId;
-	private String status;
+	private Integer sequence;
+	private Long orderId; // FK
+	private OrderItemStatus status;
 	private String productImage;
 	private String productName;
-	private int price;
+	private Integer price;
 	private String company;
 	private LocalDateTime statusChangedDate;
 	private String productLink;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
-	
 }

@@ -1,6 +1,6 @@
-package com.cloneproject.demo.order;
+package com.cloneproject.demo.orderItem;
 
-public enum OrderStatus {
+public enum OrderItemStatus {
 	배송완료,
 	교환완료,
 	환불완료,

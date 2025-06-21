@@ -1,28 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloneproject.demo.orderItem.repository.OrderItemRepository">
 
-  <insert id="insert" parameterType="com.cloneproject.demo.orderItem.OrderItem">
-    INSERT INTO order_item (sequence, order_id, status, product_image, product_name, price,
-                            company, status_changed_date, product_link, created_at, updated_at)
-    VALUES (#{sequence}, #{orderId}, #{status}, #{productImage}, #{productName}, #{price},
-            #{company}, #{statusChangedDate}, #{productLink}, NOW(), NOW())
-  </insert>
+  <select id="findByOrderId" resultType="OrderItem">
+    SELECT * FROM order_item WHERE order_id = #{orderId} ORDER BY sequence
+  </select>
 
-  <select id="findByOrderId" resultType="com.cloneproject.demo.orderItem.OrderItem">
-    SELECT *
-    FROM order_item
-    WHERE order_id = #{orderId}
+  <select id="searchByProductName" resultType="OrderItem">
+    SELECT oi.* FROM order_item oi
+    JOIN order_group og ON oi.order_id = og.id
+    WHERE og.member_id = #{memberId}
+    AND oi.product_name LIKE CONCAT('%', #{keyword}, '%')
   </select>
 
   <update id="updateStatus">
     UPDATE order_item
-    SET status              = #{status},
-        status_changed_date = NOW(),
-        updated_at          = NOW()
+    SET status = #{status}, updated_at = NOW(), status_changed_date = NOW()
     WHERE id = #{id}
+  </update>
+
+  <update id="updateStatusChangedDate">
+    UPDATE order_item
+    SET status_changed_date = NOW()
+    WHERE id = #{id}
+  </update>
+
+  <delete id="deleteById">
+    DELETE FROM order_item
+    WHERE id = #{id}
+  </delete>
+
+  <update id="autoUpdateConfirmed">
+    UPDATE order_item
+    SET status = '구매확정', updated_at = NOW()
+    WHERE status = '배송완료'
+    AND status_changed_date <= DATE_SUB(NOW(), INTERVAL 7 DAY)
   </update>
 
 </mapper>
