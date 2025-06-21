@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloneproject.demo.orderGroup.repository.OrderGroupRepository">
+
+  <delete id="delete" parameterType="long">
+    DELETE
+    FROM order_group
+    WHERE id = #{id}
+  </delete>
+
+  <insert id="insert" parameterType="com.cloneproject.demo.orderGroup.OrderGroup">
+    INSERT INTO order_group(order_date, created_at, updated_at)
+    VALUES (#{orderDate}, NOW(), NOW())
+  </insert>
+
+  <select id="findAll" resultType="com.cloneproject.demo.orderGroup.OrderGroup">
+    SELECT *
+    FROM order_group
+  </select>
+
+  <select id="findById" resultType="com.cloneproject.demo.orderGroup.OrderGroup">
+    SELECT *
+    FROM order_group
+    WHERE id = #{id}
+  </select>
+
+  <update id="update" parameterType="com.cloneproject.demo.orderGroup.OrderGroup">
+    UPDATE order_group
+    SET order_date = #{orderDate},
+        updated_at = NOW()
+    WHERE id = #{id}
+  </update>
+
+</mapper>
