@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 public interface OrderItemRepository {
 	
 	//	단일 주문 조회
-	OrderItem findById(@Param("id") Long id);
+//	OrderItem findById(@Param("id") Long id);
 	
 	//	주문 그룹 조회
 	List<OrderItem> findByOrderId(@Param("orderId") Long orderId);
