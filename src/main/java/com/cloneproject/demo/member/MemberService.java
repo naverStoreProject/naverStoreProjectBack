@@ -1,13 +1,12 @@
 package com.cloneproject.demo.member;
 
 import com.cloneproject.demo.dto.*;
-import com.cloneproject.demo.product.Product;
-import com.cloneproject.demo.product.ProductRepository;
+import com.cloneproject.demo.member.repository.MemberRepository;
+import com.cloneproject.demo.product.repository.ProductRepository;
 import com.cloneproject.demo.util.EncryptService;
 import com.cloneproject.demo.response.ErrorCode;
 import com.cloneproject.demo.response.CustomException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
+
 @RequiredArgsConstructor
 public class MemberService {
 
@@ -62,6 +61,8 @@ public class MemberService {
             Member member = new Member(memberRegisterRequest.getName(), memberRegisterRequest.getNickname(), memberRegisterRequest.getEmail(), encryptedPwd, encryptedPhone, encryptedAddress, LocalDateTime.now(), false, memberRegisterRequest.getAuthority(), LocalDateTime.now());
             memberRepository.save(member);
         }
+
+
 
     }
 
@@ -218,11 +219,7 @@ public class MemberService {
         }
     }
 
-    List<ProductResponse> getMyWishList(Long memberId) {
-        return productRepository.findWishListByUserId(memberId).stream()
-                .map(ProductResponse::new)  // 위에서 만든 Tuple 생성자 사용
-                .collect(Collectors.toList());
-    }
+
 
 
 }

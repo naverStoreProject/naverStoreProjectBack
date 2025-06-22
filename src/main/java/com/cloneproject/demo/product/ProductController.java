@@ -48,6 +48,11 @@ public class ProductController {
         else return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_FETCH_SUCCESS, productService.getProductsByCategory(category)));
     }
 
+    @GetMapping("/api/product")
+    public ResponseEntity<ApiResponse<ProductResponse>> getProductById(@RequestParam Long id) {
+        return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_FETCH_SUCCESS, productService.getProductById(id)));
+    }
+
 
 
 }
