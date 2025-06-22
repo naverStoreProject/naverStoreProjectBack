@@ -1,5 +1,6 @@
 package com.cloneproject.demo.orderGroup;
 
+import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,13 @@ public class OrderGroupController {
 	
 	@GetMapping("/member/{memberId}")
 	public List<OrderGroup> getByMemberId(@PathVariable Long memberId) {
-		log.info("요청 들어옴: memberId = {}", memberId); // ✅ 로그 찍기
+		System.out.println("🔥🔥🔥🔥 Controller 진입 시도됨");
+		log.info("요청 들어옴: memberId = {}", memberId);
 		List<OrderGroup> groups = orderGroupService.getByMemberId(memberId);
+		if (groups == null) {
+			log.error("orderGroupService.getByMemberId()가 null을 반환함");
+			return Collections.emptyList(); // 또는 throw new CustomException()
+		}
 		log.info("조회된 그룹 수: {}", groups.size());
 		return groups;
 	}
