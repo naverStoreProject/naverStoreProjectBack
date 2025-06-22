@@ -4,28 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cloneproject.demo.orderGroup.repository.OrderGroupRepository">
-  <!-- 주문 그룹 삽입 -->
-  <insert id="insert">
-    INSERT INTO order_group (member_id, order_date)
-    VALUES (#{memberId}, #{orderDate})
-  </insert>
 
-
-  <!-- 특정 회원의 모든 주문 그룹 조회 (최신순) -->
+  <!-- 회원 ID로 주문 그룹 조회 -->
   <select id="findByMemberId" resultType="com.cloneproject.demo.orderGroup.OrderGroup">
     SELECT *
     FROM order_group
     WHERE member_id = #{memberId}
-    ORDER BY order_date DESC
   </select>
 
-  <!-- 특정 회원의 최근 1년간 주문 그룹 조회 (최신순) -->
-  <select id="findPastYearByMemberId"
-    resultType="com.cloneproject.demo.orderGroup.OrderGroup">
+  <!-- 주문 그룹 ID로 조회 -->
+  <select id="findById" resultType="com.cloneproject.demo.orderGroup.OrderGroup">
     SELECT *
     FROM order_group
-    WHERE member_id = #{memberId}
-      AND order_date >= DATE_SUB(NOW(), INTERVAL 1 YEAR)
-    ORDER BY order_date DESC
+    WHERE id = #{id}
   </select>
+
 </mapper>

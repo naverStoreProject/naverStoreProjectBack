@@ -1,14 +1,14 @@
 package com.cloneproject.demo.orderItem;
 
-import java.time.LocalDateTime;
 import lombok.Data;
+import java.time.LocalDateTime;
 
 @Data
 public class OrderItem {
 	
 	private Long id;
 	private Integer sequence;
-	private Long orderId; // FK
+	private Long orderId;
 	private OrderItemStatus status;
 	private String productImage;
 	private String productName;

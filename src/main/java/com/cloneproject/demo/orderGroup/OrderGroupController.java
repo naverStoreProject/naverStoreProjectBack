@@ -1,13 +1,11 @@
 package com.cloneproject.demo.orderGroup;
 
-import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/order-group")
@@ -15,15 +13,16 @@ public class OrderGroupController {
 	
 	private final OrderGroupService orderGroupService;
 	
-	//	전체 주문 그룹 조회
 	@GetMapping("/member/{memberId}")
-	public List<OrderGroup> getByMember(@PathVariable Long memberId) {
-		return orderGroupService.getByMemberId(memberId);
+	public List<OrderGroup> getByMemberId(@PathVariable Long memberId) {
+		log.info("요청 들어옴: memberId = {}", memberId); // ✅ 로그 찍기
+		List<OrderGroup> groups = orderGroupService.getByMemberId(memberId);
+		log.info("조회된 그룹 수: {}", groups.size());
+		return groups;
 	}
 	
-	//	1년 내 주문 그룹 조회
-	@GetMapping("/member/{memberId}/past-year")
-	public List<OrderGroup> getPastYear(@PathVariable Long memberId) {
-		return orderGroupService.getPastYearOrders(memberId);
+	@GetMapping("/{id}")
+	public OrderGroup getById(@PathVariable Long id) {
+		return orderGroupService.getById(id);
 	}
 }
