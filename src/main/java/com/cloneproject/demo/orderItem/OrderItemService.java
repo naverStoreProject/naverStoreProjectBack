@@ -1,6 +1,6 @@
 package com.cloneproject.demo.orderItem;
 
-import com.cloneproject.demo.member.MemberRepository;
+import com.cloneproject.demo.member.repository.MemberSpringDataJpaRepository;
 import com.cloneproject.demo.orderItem.repository.OrderItemRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ public class OrderItemService {
 	
 	//	필드
 	private final OrderItemRepository orderItemRepository;
-	private final MemberRepository memberRepository;
+	private final MemberSpringDataJpaRepository memberRepository;
 	
 	//	주문 그룹 ID 기준으로 모든 주문 상품 조회
 	public List<OrderItem> getByOrderId(Long orderId) {
