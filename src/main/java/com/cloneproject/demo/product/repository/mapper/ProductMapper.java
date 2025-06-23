@@ -2,7 +2,6 @@ package com.cloneproject.demo.product.repository.mapper;
 
 import com.cloneproject.demo.product.Product;
 import com.cloneproject.demo.product.repository.ProductRepository;
-import jakarta.persistence.Tuple;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -13,9 +12,11 @@ import java.util.Optional;
 @Mapper
 public interface ProductMapper extends ProductRepository {
 
-    @Insert("INSERT INTO product (" +
-            "VALUES (null, #{name}, #{brand}, #{price}, #{discountRate}, #{category}, #{description}, #{stockQuantity}, #{thumnailURL}, #{createdAt})")
-    Product save(Product product);
+    @Insert("INSERT INTO product " +
+            "(name, brand, price, discount_rate, category, description, stock_quantity, thumbnail_url, created_at) " +
+            "VALUES (#{name}, #{brand}, #{price}, #{discountRate}, #{category}, #{description}, #{stockQuantity}, #{thumbnailURL}, #{createdAt})")
+    int save(Product product);
+
 
 
     @Select("SELECT * FROM product WHERE id = #{id}")
@@ -27,8 +28,8 @@ public interface ProductMapper extends ProductRepository {
     @Select("SELECT * FROM product WHERE name = #{name}")
     List<Product> findByName(String name);
 
-    @Select("SELECT * FROM product WHERE category = #{category}")
-    List<Product> findByCategory(Long category);
+    @Select("SELECT * FROM product WHERE main_category = #{mainCategory} AND sub_category = #{subCategory}")
+    List<Product> findByCategory(Integer mainCategory, Integer subCategory);
 
 
 }

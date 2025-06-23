@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloneproject.demo.review.repository.mapper.ReviewMapper">
+
+
+    <select id="findMyReviews" resultMap="myReviewMap">
+        SELECT r.*, p.id as product_id, p.name, p.brand, p.price, p.discount_rate,
+               p.category, p.description, p.stock_quantity, p.thumbnailurl,
+               p.created_at as p_created_at
+        FROM review r
+            LEFT JOIN product p
+            ON r.product_id = p.id
+        WHERE r.member_id = #{memberId}
+    </select>
+
+    <resultMap id="reviewProductMap" type="com.cloneproject.demo.product.Product">
+        <id column="product_id" property="id" />
+        <result column="name" property="name" />
+        <result column="brand" property="brand" />
+        <result column="price" property="price" />
+        <result column="discount_rate" property="discountRate" />
+        <result column="category" property="category" />
+        <result column="description" property="description" />
+        <result column="stock_quantity" property="stockQuantity" />
+        <result column="thumbnailurl" property="thumbnailURL" />
+        <result column="p_created_at" property="createdAt" />
+    </resultMap>
+
+    <resultMap id="myReviewMap" type="com.cloneproject.demo.review.dto.MyReview">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="title" property="title" />
+        <result column="content" property="content" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="rating" property="rating" />
+        <result column="blinded" property="blinded" />
+        <result column="deleted" property="deleted" />
+        <result column="likes" property="likes" />
+        <result column="dislikes" property="dislikes" />
+        <result column="verified" property="verified" />
+        <association property="product" resultMap="reviewProductMap" />
+    </resultMap>
+
+
+</mapper>

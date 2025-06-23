@@ -1,5 +1,6 @@
 package com.cloneproject.demo.review;
 
+import com.cloneproject.demo.product.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
+//@Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class Review {
     private Long id;
 
     private Long productId;
-    private Long userId;
+    private Long memberId;
     private String title;
 
     @Lob
@@ -36,6 +37,7 @@ public class Review {
     private boolean verified;
     @Column(precision = 2, scale = 1)
     private BigDecimal rating;
+    private Product product;
 
 
 }

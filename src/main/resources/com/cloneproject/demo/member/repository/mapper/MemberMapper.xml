@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloneproject.demo.member.repository.mapper.MemberMapper">
+    <insert id="save">
+        INSERT INTO member (
+            authority, status, join_date, updated_at, address, email, name, nickname, phone, pwd
+        ) VALUES (
+            #{authority}, #{status}, #{joinDate}, #{updatedAt}, #{address}, #{email}, #{name}, #{nickname}, #{phone}, #{pwd}
+        )
+    </insert>
+
+    <select id="findById" resultType="com.cloneproject.demo.member.Member">
+        SELECT * FROM member WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultType="com.cloneproject.demo.member.Member">
+        SELECT * FROM member
+    </select>
+
+    <select id="findByEmail" resultType="com.cloneproject.demo.member.Member">
+        SELECT * FROM member WHERE email = #{email}
+    </select>
+
+    <select id="findByName" resultType="com.cloneproject.demo.member.Member">
+        SELECT * FROM member WHERE name = #{name}
+    </select>
+
+    <select id="findByNameAndEmail" resultType="com.cloneproject.demo.member.Member">
+        SELECT * FROM member WHERE name = #{name} AND email = #{email}
+    </select>
+
+    <select id="countWishlist" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM member_wishlist WHERE member_id = id
+    </select>
+
+
+</mapper>

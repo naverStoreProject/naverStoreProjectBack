@@ -14,23 +14,29 @@ import java.time.LocalDateTime;
 public class ProductAddRequest {
     private String name;
     private String brand;
-    private int price;
-    private BigDecimal discountRate;
-    private Long category;
+    private String thumbnailUrl;
     private String description;
+    private int mainCategory;
+    private int subCategory;
+    private int originalPrice;
+    private int discountRate;
     private int stockQuantity;
-    private String thumbnailURL;
+    private int averageRating;
+    private int ratingCount;
 
     public Product toEntity() {
         return Product.builder()
                 .name(name)
                 .brand(brand)
-                .price(price)
-                .discountRate(discountRate)
-                .category(category)
+                .thumbnailUrl(thumbnailUrl)
                 .description(description)
+                .mainCategory(mainCategory)
+                .subCategory(subCategory)
+                .originalPrice(originalPrice)
+                .discountRate(discountRate)
                 .stockQuantity(stockQuantity)
-                .thumbnailURL(thumbnailURL)
+                .averageRating(averageRating)
+                .ratingCount(ratingCount)
                 .createdAt(LocalDateTime.now())
                 .build();
     }

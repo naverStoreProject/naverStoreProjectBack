@@ -39,13 +39,13 @@ public class ProductController {
     /**
      * 주어진 카테고리에 해당하는 상품 목록을 조회합니다.
      *
-     * @param category 조회할 상품의 카테고리(null이어도 가능)
+     * @param  mainCategory, subCategory 조회할 상품의 카테고리 (0이어도 가능)
      * @return category가 null이면 상품 전체 조회, null이 아니라면 해당 카테고리의 product 조회
      */
     @GetMapping("/api/products")
-    public ResponseEntity<ApiResponse<List<ProductResponse>>> getProductsByCategory(@RequestParam(required = false) Long category) {
-        if (category == null) return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_FETCH_SUCCESS, productService.getAllProducts()));
-        else return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_FETCH_SUCCESS, productService.getProductsByCategory(category)));
+    public ResponseEntity<ApiResponse<List<ProductResponse>>> getProductsByCategory(@RequestParam(required = false) Integer mainCategory, @RequestParam(required = false) Integer subCategory) {
+        if ((mainCategory == null || mainCategory == 0) || (subCategory == null || subCategory == 0)) return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_FETCH_SUCCESS, productService.getAllProducts()));
+        else return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_FETCH_SUCCESS, productService.getProductsByCategory(mainCategory, subCategory)));
     }
 
     @GetMapping("/api/product")

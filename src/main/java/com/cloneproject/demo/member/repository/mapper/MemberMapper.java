@@ -21,4 +21,6 @@ public interface MemberMapper extends MemberRepository {
     List<Member> findByNameAndEmail(String name, String email);
     int countWishlist(Long id);
 
+
+
 }
