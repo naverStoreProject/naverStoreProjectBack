@@ -19,6 +19,14 @@ SHOW TABLES;
 SELECT * FROM product;
 
 
+SELECT r.*, p.id as product_id, p.name, p.brand, p.price, p.discount_rate,
+       p.category, p.description, p.stock_quantity, p.thumbnailurl,
+       p.created_at as p_created_at
+FROM review r
+         LEFT JOIN product p
+                   ON r.product_id = p.id
+WHERE r.member_id = 1;
+
 
 
 

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
@@ -25,6 +26,12 @@ public class MyBatisConfig {
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
+
+//    @Bean(name = "dataSourceTransactionManager")
+//    public DataSourceTransactionManager transactionManager(DataSource dataSource){
+//        DataSourceTransactionManager manager = new DataSourceTransactionManager(dataSource);
+//        return manager;
+//    }
 
 
 

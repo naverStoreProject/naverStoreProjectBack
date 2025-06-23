@@ -2,7 +2,6 @@ package com.cloneproject.demo.product.repository.mapper;
 
 import com.cloneproject.demo.product.Product;
 import com.cloneproject.demo.product.repository.ProductRepository;
-import jakarta.persistence.Tuple;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -14,9 +13,10 @@ import java.util.Optional;
 public interface ProductMapper extends ProductRepository {
 
     @Insert("INSERT INTO product " +
-            "VALUES (null, #{name}, #{brand}, #{thumbnailUrl}, #{description}, #{mainCategory}, #{subCategory}, #{originalPrice}, #{discountRate}, #{stockQuantity}, #{averageRating}, #{ratingCount}, #{createdAt})")
-    void save(Product product);
-//    Product save(Product product);
+            "(name, brand, price, discount_rate, category, description, stock_quantity, thumbnail_url, created_at) " +
+            "VALUES (#{name}, #{brand}, #{price}, #{discountRate}, #{category}, #{description}, #{stockQuantity}, #{thumbnailURL}, #{createdAt})")
+    int save(Product product);
+
 
 
     @Select("SELECT * FROM product WHERE id = #{id}")
