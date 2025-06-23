@@ -18,6 +18,7 @@ public interface ProductMapper extends ProductRepository {
     int save(Product product);
 
 
+
     @Select("SELECT * FROM product WHERE id = #{id}")
     Optional<Product> findById(Long id);
 
@@ -27,8 +28,8 @@ public interface ProductMapper extends ProductRepository {
     @Select("SELECT * FROM product WHERE name = #{name}")
     List<Product> findByName(String name);
 
-    @Select("SELECT * FROM product WHERE category = #{category}")
-    List<Product> findByCategory(Long category);
+    @Select("SELECT * FROM product WHERE main_category = #{mainCategory} AND sub_category = #{subCategory}")
+    List<Product> findByCategory(Integer mainCategory, Integer subCategory);
 
 
 }

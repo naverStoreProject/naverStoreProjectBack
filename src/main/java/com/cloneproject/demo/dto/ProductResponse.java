@@ -17,20 +17,23 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 public class ProductResponse {
+
     private String name;
     private String brand;
-    private int originalPrice;
-    private BigDecimal discountRate;
-    private int currentPrice;
-    private Long category;
+    private String thumbnailUrl;
     private String description;
+
+    private int originalPrice;
+    private int discountRate;
+    private int currentPrice;
+
+    private int mainCategory;
+    private int subCategory;
+
     private int stockQuantity;
-    private String image;
-
-    @Column(precision = 3, scale = 2)
-    private BigDecimal averageRating;
-
+    private int averageRating;
     private int ratingCount;
+
 
     
 //    public Product toEntity() {
@@ -40,21 +43,46 @@ public class ProductResponse {
     private ProductResponse(Product product) {
         this.name = product.getName();
         this.brand = product.getBrand();
-        this.originalPrice = product.getPrice();
+        this.thumbnailUrl = product.getThumbnailUrl();
+        this.description = product.getDescription();
+        this.originalPrice = product.getOriginalPrice();
         this.discountRate = product.getDiscountRate();
         this.currentPrice = BigDecimal.valueOf(originalPrice)
-                .multiply(BigDecimal.ONE.subtract(discountRate))
-                .setScale(0, RoundingMode.HALF_UP)
+                .multiply(BigDecimal.valueOf(100 - discountRate))
+                .divide(BigDecimal.valueOf(100), 0, RoundingMode.HALF_UP)
                 .intValue();
-        this.category = product.getCategory();
-        this.description = product.getDescription();
+        this.mainCategory = product.getMainCategory();
+        this.subCategory = product.getSubCategory();
         this.stockQuantity = product.getStockQuantity();
-        this.image = product.getThumbnailURL();
+        this.averageRating = product.getAverageRating();
+        this.ratingCount = product.getRatingCount();
     }
 
     public static ProductResponse of(Product product) {
-        return product == null ? null : new ProductResponse(product);
+
+        return ProductResponse.builder()
+                .name(product.getName())
+                .brand(product.getBrand())
+                .originalPrice(product.getOriginalPrice())
+                .discountRate(product.getDiscountRate())
+                .currentPrice(BigDecimal.valueOf(product.getOriginalPrice())
+                        .multiply(BigDecimal.valueOf(10000 - product.getDiscountRate()))
+                        .divide(BigDecimal.valueOf(10000), 0, RoundingMode.HALF_UP)
+                        .intValue())
+                .mainCategory(product.getMainCategory())
+                .subCategory(product.getSubCategory())
+                .description(product.getDescription())
+                .stockQuantity(product.getStockQuantity())
+                .thumbnailUrl(product.getThumbnailUrl())
+                .build();
     }
+
+
+
+
+//    public static ProductResponse of(Product product) {
+//        return product == null ? null : new ProductResponse(product);
+//    }
 
 
 }
