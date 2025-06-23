@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProductSpringDataJpaRepository /* extends JpaRepository<Product, Long>, ProductRepository */{
-    List<Product> findByCategory(Long category);
+    List<Product> findByCategory(Integer mainCategory, Integer subCategory);
     List<Product> findByName(String name);
 
 
