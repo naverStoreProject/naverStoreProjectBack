@@ -48,7 +48,7 @@ import org.springframework.data.repository.query.Param;
  * 참고: https://priming.tistory.com/114
  */
 
-public interface MemberSpringDataJpaRepository extends JpaRepository<Member, Long>, MemberRepository {
+public interface MemberSpringDataJpaRepository /*extends JpaRepository<Member, Long>, MemberRepository */{
     List<Member> findByName(String name);
     Optional<Member> findByEmail(String email);
     List<Member> findByNameAndEmail(String name, String email);

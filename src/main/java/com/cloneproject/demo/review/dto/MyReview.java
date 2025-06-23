@@ -1,33 +1,19 @@
-package com.cloneproject.demo.review;
+package com.cloneproject.demo.review.dto;
 
 import com.cloneproject.demo.product.Product;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-//@Entity
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Review {
-
-    @Id @GeneratedValue( strategy =  GenerationType.IDENTITY)
+@Data
+public class MyReview {
     private Long id;
-
-    private Long productId;
     private Long memberId;
     private String title;
-
-    @Lob
-    @Column(columnDefinition = "TEXT")
     private String content;
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private boolean deleted;
@@ -35,9 +21,6 @@ public class Review {
     private int likes;
     private int dislikes;
     private boolean verified;
-    @Column(precision = 2, scale = 1)
     private BigDecimal rating;
     private Product product;
-
-
 }

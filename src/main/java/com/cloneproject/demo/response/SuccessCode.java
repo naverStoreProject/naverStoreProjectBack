@@ -20,6 +20,7 @@ public enum SuccessCode {
     LOGIN_SUCCESS(301, "로그인 성공"),
     
     // Review
+    REVIEW_FETCH_SUCCESS(400, "리뷰 조회 성공"),
     
     // MainBanner
     MB_FETCH_SUCCESS(500, "메인 배너 가져오기 성공");
