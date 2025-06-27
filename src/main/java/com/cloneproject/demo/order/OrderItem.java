@@ -1,21 +1,14 @@
 //도메인
 package com.cloneproject.demo.order;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 
 @Data
 @NoArgsConstructor
-public class Order {
+public class OrderItem {
 	
 	private Long id;
 	private Long orderGroupId;
@@ -30,7 +23,8 @@ public class Order {
 	private LocalDateTime statusChangedTime;
 	private String company;
 	
-	public Order(Long id, Long orderGroupId, String title, String detail, String image, Integer count,
+	public OrderItem(Long id, Long orderGroupId, String title, String detail, String image,
+			Integer count,
 			Integer price, String link, LocalDateTime orderTime, OrderEnum status,
 			LocalDateTime statusChangedTime,
 			String company) {
