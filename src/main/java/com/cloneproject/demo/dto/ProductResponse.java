@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
 @Builder
 public class ProductResponse {
 
+    private Long id;
+
     private String name;
     private String brand;
     private String thumbnailUrl;
@@ -25,7 +27,7 @@ public class ProductResponse {
 
     private int originalPrice;
     private int discountRate;
-    private int currentPrice;
+    private int discountPrice;
 
     private int mainCategory;
     private int subCategory;
@@ -34,6 +36,7 @@ public class ProductResponse {
     private int averageRating;
     private int ratingCount;
 
+    private LocalDateTime createdAt;
 
     
 //    public Product toEntity() {
@@ -41,13 +44,14 @@ public class ProductResponse {
 //    }
 
     private ProductResponse(Product product) {
+        this.id = product.getId();
         this.name = product.getName();
         this.brand = product.getBrand();
         this.thumbnailUrl = product.getThumbnailUrl();
         this.description = product.getDescription();
         this.originalPrice = product.getOriginalPrice();
         this.discountRate = product.getDiscountRate();
-        this.currentPrice = BigDecimal.valueOf(originalPrice)
+        this.discountPrice = BigDecimal.valueOf(originalPrice)
                 .multiply(BigDecimal.valueOf(100 - discountRate))
                 .divide(BigDecimal.valueOf(100), 0, RoundingMode.HALF_UP)
                 .intValue();
@@ -61,11 +65,12 @@ public class ProductResponse {
     public static ProductResponse of(Product product) {
 
         return ProductResponse.builder()
+                .id(product.getId())
                 .name(product.getName())
                 .brand(product.getBrand())
                 .originalPrice(product.getOriginalPrice())
                 .discountRate(product.getDiscountRate())
-                .currentPrice(BigDecimal.valueOf(product.getOriginalPrice())
+                .discountPrice(BigDecimal.valueOf(product.getOriginalPrice())
                         .multiply(BigDecimal.valueOf(10000 - product.getDiscountRate()))
                         .divide(BigDecimal.valueOf(10000), 0, RoundingMode.HALF_UP)
                         .intValue())

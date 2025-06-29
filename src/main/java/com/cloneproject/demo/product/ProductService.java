@@ -57,6 +57,29 @@ public class ProductService {
         }
     }
 
+    public List<ProductResponse> getProductsByMainCategory(Integer mainCategory) {
+        List<Product> products = productRepository.findByMainCategory(mainCategory);
+        if (products.isEmpty()) throw new CustomException(ErrorCode.PRODUCT_NOT_FOUND);
+        else {
+            return products.stream()
+                    .map(product -> ProductResponse.of(product))
+                    .toList();
+        }
+    }
+
+    public List<ProductResponse> getProductsBySubCategory(Integer subCategory) {
+        List<Product> products = productRepository.findBySubCategory(subCategory);
+        if (products.isEmpty()) throw new CustomException(ErrorCode.PRODUCT_NOT_FOUND);
+        else {
+            return products.stream()
+                    .map(product -> ProductResponse.of(product))
+                    .toList();
+        }
+    }
+
+
+
+
 
     public ProductResponse getProductById(Long id) {
         Optional<Product> findProduct = productRepository.findById(id);
@@ -65,10 +88,6 @@ public class ProductService {
             return findProduct.map(product -> ProductResponse.of(product)).get();
         }
     }
-
-
-
-
 
 
 
