@@ -44,8 +44,10 @@ public class ProductController {
      */
     @GetMapping("/api/products")
     public ResponseEntity<ApiResponse<List<ProductResponse>>> getProductsByCategory(@RequestParam(required = false) Integer mainCategory, @RequestParam(required = false) Integer subCategory) {
-        if ((mainCategory == null || mainCategory == 0) || (subCategory == null || subCategory == 0)) return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_FETCH_SUCCESS, productService.getAllProducts()));
-        else return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_FETCH_SUCCESS, productService.getProductsByCategory(mainCategory, subCategory)));
+        if ((mainCategory == null || mainCategory == 0) || (subCategory == null || subCategory == 0))
+            return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_FETCH_SUCCESS, productService.getAllProducts()));
+        else
+            return ResponseEntity.ok(ApiResponse.success(SuccessCode.PRODUCT_FETCH_SUCCESS, productService.getProductsByCategory(mainCategory, subCategory)));
     }
 
     @GetMapping("/api/product")
