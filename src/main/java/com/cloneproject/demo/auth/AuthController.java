@@ -19,7 +19,7 @@ public class AuthController {
     @PostMapping("/api/login")
     public ResponseEntity<ApiResponse<TokenResponse>> login(@RequestBody MemberLoginRequest memberLoginRequest) {
         String email = memberLoginRequest.getEmail();
-        String pwd = memberLoginRequest.getPassword();
+        String pwd = memberLoginRequest.getPwd();
 
         return ResponseEntity.ok(ApiResponse.success(SuccessCode.LOGIN_SUCCESS, authService.memberLogin(email, pwd)));
     }
