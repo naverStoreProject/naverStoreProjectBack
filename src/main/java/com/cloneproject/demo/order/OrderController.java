@@ -34,7 +34,7 @@ public class OrderController {
 	
 	//주문목록조회
 	@PreAuthorize("hasRole('USER')")
-	@GetMapping("/api/order/my")
+	@GetMapping("/api/order")
 	public ResponseEntity<ApiResponse<List<OrderItemResponse>>> getMyOrders(
 			@AuthenticationPrincipal LoginMember loginMember) {
 		List<OrderItemResponse> orders = orderService.findByMemberId(loginMember.getId());

@@ -8,6 +8,7 @@
     FROM order_item
     WHERE id = #{orderId}
   </delete>
+
   <insert id="insertOrderItem">
     INSERT INTO order_item(order_group_id, title, detail, image, count, price, link, order_time,
                            status, status_changed_time, company)
