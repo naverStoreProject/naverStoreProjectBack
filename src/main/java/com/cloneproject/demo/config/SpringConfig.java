@@ -2,7 +2,6 @@ package com.cloneproject.demo.config;
 
 import com.cloneproject.demo.member.repository.MemberRepository;
 import com.cloneproject.demo.member.MemberService;
-import com.cloneproject.demo.member.repository.MemberSpringDataJpaRepository;
 import com.cloneproject.demo.member.repository.mapper.MemberMapper;
 import com.cloneproject.demo.product.repository.mapper.ProductMapper;
 import com.cloneproject.demo.product.repository.ProductRepository;

@@ -32,7 +32,7 @@
     </select>
 
     <select id="countWishlist" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM member_wishlist WHERE member_id = id
+        SELECT COUNT(*) FROM member_wishlist WHERE member_id = ${id}
     </select>
 
 
