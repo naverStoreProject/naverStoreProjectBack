@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloneproject.demo.mainBanner.repository.mapper.MainBannerMapper">
+    <select id="findAll" resultType="com.cloneproject.demo.mainBanner.MainBanner">
+        SELECT * FROM main_banner WHERE is_delete = 1
+    </select>
+
+    <select id="findById" resultType="com.cloneproject.demo.mainBanner.MainBanner">
+        SELECT * FROM main_banner WHERE id = #{id} AND is_delete = 1
+    </select>
+
+    <insert id="save">
+        INSERT INTO main_banner (
+            title, semi_title, main_img, semi_img1, semi_img2, semi_img3, semi_img4, 
+            reg_date, reg_ip, is_hide, is_delete
+        ) VALUES (
+            #{title}, #{semiTitle}, #{mainImg}, #{semiImg1}, #{semiImg2}, #{semiImg3}, #{semiImg4}, 
+            #{regDate}, #{regIp}, #{isHide}, #{isDelete}
+        )
+    </insert>
+</mapper>
