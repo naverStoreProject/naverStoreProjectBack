@@ -5,8 +5,9 @@ import com.cloneproject.demo.mainBanner.MainBannerService;
 import com.cloneproject.demo.mainBanner.repository.MainBannerRepository;
 import com.cloneproject.demo.mainBanner.repository.mapper.MainBannerMapper;
 import com.cloneproject.demo.member.MemberService;
-import com.cloneproject.demo.member.repository.MemberSpringDataJpaRepository;
 import com.cloneproject.demo.member.repository.mapper.MemberMapper;
+import com.cloneproject.demo.order.OrderService;
+import com.cloneproject.demo.order.repository.mapper.OrderMapper;
 import com.cloneproject.demo.product.repository.mapper.ProductMapper;
 import com.cloneproject.demo.product.repository.ProductRepository;
 import com.cloneproject.demo.product.ProductService;
@@ -23,25 +24,28 @@ public class SpringConfig {
 
     private final MemberRepository memberRepository;
     private final ProductRepository productRepository;
+    private final OrderMapper orderMapper; // 'main' 브랜치에서 추가된 부분
     private final EncryptService encryptService;
     private final ReviewRepository reviewRepository;
-    private final MainBannerRepository mainBannerRepository;
+    private final MainBannerRepository mainBannerRepository; // '00/mainBannerChange/0627' 브랜치에서 추가된 부분
 
     @Autowired
-    public SpringConfig(MemberMapper memberMapper, ProductMapper productMapper, EncryptService encryptService, ReviewMapper reviewMapper, MainBannerMapper mainBannerMapper) {
+    public SpringConfig(MemberMapper memberMapper, ProductMapper productMapper,
+                        OrderMapper orderMapper, // 'main' 브랜치에서 추가된 부분
+                        EncryptService encryptService, ReviewMapper reviewMapper,
+                        MainBannerMapper mainBannerMapper) { // '00/mainBannerChange/0627' 브랜치에서 추가된 부분
         this.memberRepository = memberMapper;
         this.productRepository = productMapper;
+        this.orderMapper = orderMapper; // 'main' 브랜치에서 추가된 부분
         this.encryptService = encryptService;
         this.reviewRepository = reviewMapper;
-        this.mainBannerRepository = mainBannerMapper;
+        this.mainBannerRepository = mainBannerMapper; // '00/mainBannerChange/0627' 브랜치에서 추가된 부분
     }
-
 
     @Bean
     public MemberService memberService() {
         return new MemberService(memberRepository, productRepository, encryptService);
     }
-
 
     @Bean
     public ProductService productService() {
@@ -54,10 +58,9 @@ public class SpringConfig {
     }
 
     @Bean
-    public MainBannerService mainBannerService() {
-      return new MainBannerService(mainBannerRepository);
+    OrderService orderService() { // 'main' 브랜치에서 추가된 부분
+        return new OrderService(orderMapper);
     }
 
-
-
-}
+    @Bean
+    public MainBannerService

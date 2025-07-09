@@ -15,5 +15,7 @@ public interface ProductRepository {
 
     List<Product> findByName(String name);
     List<Product> findByCategory(Integer mainCategory, Integer subCategory);
+    List<Product> findByMainCategory(Integer mainCategory);
+    List<Product> findBySubCategory(Integer subCategory);
 
 }
