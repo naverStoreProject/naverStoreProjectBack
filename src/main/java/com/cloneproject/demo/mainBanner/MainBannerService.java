@@ -1,6 +1,7 @@
 package com.cloneproject.demo.mainBanner;
 
 import com.cloneproject.demo.dto.MainBannerResponse;
+import com.cloneproject.demo.mainBanner.repository.MainBannerRepository;
 import com.cloneproject.demo.response.CustomException;
 import com.cloneproject.demo.response.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -25,12 +26,5 @@ public class MainBannerService {
           .toList();
     }
   }
-
-  // public List<MainBannerResponse> getMainBanner(Long id) {
-  //   MainBanner mbanner = mainBannerRepository.findById(id)
-  //     .orElseThrow(() -> new CustomException(ErrorCode.MAINBANNER_NOT_FOUND));
-
-  //   return List.of(MainBannerResponse.from(mbanner));
-  // }
-
+  
 }
